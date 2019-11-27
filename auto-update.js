@@ -1,6 +1,6 @@
-import { app } from 'electron';
-import log from 'electron-log';
-import { autoUpdater } from 'electron-updater';
+const { app } = require('electron');
+const log = require('electron-log');
+const { autoUpdater } = require('electron-updater');
 
 autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';

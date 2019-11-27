@@ -1,5 +1,5 @@
 // TODO: 読み込み方バラバラでキモいのでそのうち直す
-import './auto-update';
+const updater = require('./auto-update');
 const electron = require('electron');
 const { ipcMain } = require('electron');
 
