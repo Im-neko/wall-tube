@@ -2,3 +2,5 @@ node_modules
 dist
 *.swp
 .DS_Store
+.env
+WallTube-darwin-x64

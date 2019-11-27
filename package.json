@@ -6,18 +6,29 @@
   "scripts": {
     "dev": "electron main.js",
     "start": "electron .",
-    "build": "electron-packager . WallTube --platform=darwin --arch=x64 --electron-version=4.0.1",
+    "build": "electron-packager . WallTube --platform=darwin --arch=x64 --electron-version=4.0.1 --icon=img/icon.icns",
     "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "dist": "electron-builder",
+    "publish": "electron-builder --mac -p always"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Im-neko/wall-tube.git"
   },
   "build": {
-    "appId": "wall-tube",
+    "appId": "com.github.imneko.walltube",
     "mac":{
-      "category": "wallpaper app"
+      "icon": "img/icon.icns",
+      "category": "wallpaper app",
+      "target": [
+        "zip",
+        "dmg"
+      ],
+      "publish": [{
+        "provider": "github",
+        "owner": "im-neko",
+        "repo": "wall-tube"
+      }]
     }
   },
   "author": "im-neko",

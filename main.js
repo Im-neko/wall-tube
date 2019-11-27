@@ -30,6 +30,7 @@ app.on('ready', function() {
   // mainWindow.openDevTools(); 
   mainWindow.on('closed', function() {
     mainWindow = null
+    app.quit();
   });
 
   ipcMain.on('loadStatus', (event, arg) => {
