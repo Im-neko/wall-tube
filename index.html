@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" integrity="sha384-SI27wrMjH3ZZ89r4o+fGIJtnzkAnFs3E4qz9DIYioCQ5l9Rd/7UAa8DHcaL8jkWt" crossorigin="anonymous">
+  </head>
+  <body>
+    <div id="player" style="display:none"></div>
+    <div id="start-page">
+      <header>WallTube</header>
+      <img src="https://www.im-neko.dev/assets/youtube-screen.jpg" alt="sample image">
+      <div id="useage">
+        Useage
+        <ol>
+          <li>Copy your playlist URL</li>
+          <li>Paste to form</li>
+          <li>Click "OK"</li>
+        </ol>
+      </div>
+      <div id="form">
+        <input id="input-url" type="text" placeholder="Enter your playlist url">
+        <button onclick="start()">OK</button>
+      </div>
+      <div class="attention">
+        [Attention]
+        <p> When the video is forbidden to play on embedded player, WallTube will skip the video.</p>
+        <p>support: <a href="https://twitter.com/im_nuko">Twitter: Im_nuko</a> or  <a href="https://github.com/im-neko">Github: Im-neko</a></p>
+        <p>repository: <a href="https://github.com/im-neko/wall-tube">GitHub</a></p>
+      </div>
+      
+    </div>
+    <script>
+      const { ipcRenderer } = require('electron');
+
+      const start = () => {
+        document.getElementById('start-page').style.display = "none";
+        document.getElementById('player').style.display = "block";
+
+        const listId = getListId(document.getElementById('input-url').value);
+        console.log(listId);
+        if (!listId) {
+          alert("invalid url");
+          document.getElementById('start-page').style.display = "block";
+          document.getElementById('player').style.display = "none";
+        }
+
+        let player;
+
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        window.onYouTubeIframeAPIReady = function() {
+          player = new YT.Player('player', {
+            events: { 
+              'onReady': onPlayerReady,
+              'onError': onError,
+            }
+          });
+        };
+        const onPlayerReady = () => {
+          player.loadPlaylist({
+            'listType': 'playlist',
+            'list': listId,
+            'index': 1,
+            'startSeconds': 0,
+          });
+          ipcRenderer.send('loadStatus', true);
+        }
+        const onError = (event) => {
+          console.error(event)
+          player.nextVideo();
+        }
+      }
+
+      const getListId = (url) => {
+        const regex = RegExp('list=(.*?)(&|$)','g');
+        const res = regex.exec(url);
+        return res
+          ? res[1]
+          : false;
+      }
+    </script>
+  </body>
+</html>

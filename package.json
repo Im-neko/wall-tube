@@ -1,0 +1,37 @@
+{
+  "name": "wall-tube",
+  "version": "1.0.0",
+  "description": "wallpaper app",
+  "main": "main.js",
+  "scripts": {
+    "dev": "electron main.js",
+    "start": "electron .",
+    "build": "electron-packager . WallTube --platform=darwin --arch=x64 --electron-version=4.0.1",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Im-neko/wall-tube.git"
+  },
+  "build": {
+    "appId": "wall-tube",
+    "mac":{
+      "category": "wallpaper app"
+    }
+  },
+  "author": "im-neko",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Im-neko/wall-tube/issues"
+  },
+  "homepage": "https://github.com/Im-neko/wall-tube#readme",
+  "devDependencies": {
+    "electron": "^7.1.2",
+    "electron-builder": "^21.2.0"
+  },
+  "dependencies": {
+    "electron-log": "^3.0.9",
+    "electron-updater": "^4.2.0"
+  }
+}

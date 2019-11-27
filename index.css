@@ -1,0 +1,54 @@
+html,body { 
+  margin: 0px;
+  padding: 0px;
+  height: 100%;
+}
+
+#player {
+  height:100%;
+  width: 100%;
+}
+
+#start-page {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  margin-top: 90px;
+  width: 80%;
+}
+
+#useage {
+}
+
+#form {
+  width: 70%;
+  margin-top: 24px;
+}
+
+#input-url {
+  width: 80%;
+}
+
+.attention {
+  margin-top: 20px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px;
+  background-color: #707070;
+  color: #FFF;
+  font-size: 42px;
+  padding-top: 12px;
+  padding-left: 120px;
+}
