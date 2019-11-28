@@ -6,9 +6,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" integrity="sha384-SI27wrMjH3ZZ89r4o+fGIJtnzkAnFs3E4qz9DIYioCQ5l9Rd/7UAa8DHcaL8jkWt" crossorigin="anonymous">
   </head>
   <body>
-    <div id="player" style="display:none"></div>
-    <div id="start-page">
-      <header>WallTube</header>
+    <div id="player" style="display:none"></div> <div id="start-page"> <header>WallTube</header>
       <img src="https://www.im-neko.dev/assets/youtube-screen.jpg" alt="sample image">
       <div id="useage">
         Useage
@@ -57,6 +55,7 @@
             events: { 
               'onReady': onPlayerReady,
               'onError': onError,
+              'onStateChange': onStateChange,
             }
           });
         };
@@ -64,11 +63,15 @@
           player.loadPlaylist({
             'listType': 'playlist',
             'list': listId,
-            'index': 1,
-            'startSeconds': 0,
           });
-          ipcRenderer.send('loadStatus', true);
         }
+
+        const onStateChange = (event) => {
+          if (event.data == 1) {
+            ipcRenderer.send('loadStatus', true);
+          }
+        }
+
         const onError = (event) => {
           console.error(event)
           player.nextVideo();
