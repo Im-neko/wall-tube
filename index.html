@@ -67,14 +67,35 @@
         }
 
         const onStateChange = (event) => {
-          if (event.data == 1) {
-            ipcRenderer.send('loadStatus', true);
+          switch (event.data) {
+            case 0: 
+              player.loadPlaylist({
+                'listType': 'playlist',
+                'list': listId,
+              });
+              return
+            case 1:
+              ipcRenderer.send('loadStatus', true);
+              return
+            default:
+              return;
           }
         }
 
         const onError = (event) => {
           console.error(event)
           player.nextVideo();
+          switch (event.data) {
+            case 2: 
+              player.loadPlaylist({
+                'listType': 'playlist',
+                'list': listId,
+              });
+              return
+            default:
+              player.nextVideo();
+              return;
+          }
         }
       }
 

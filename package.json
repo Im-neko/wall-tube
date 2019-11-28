@@ -1,6 +1,6 @@
 {
   "name": "WallTube",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "wallpaper app",
   "main": "main.js",
   "scripts": {
