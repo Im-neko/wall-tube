@@ -7,7 +7,7 @@
   </head>
   <body>
     <div id="player" style="display:none"></div> <div id="start-page"> <header>WallTube</header>
-      <img src="https://www.im-neko.dev/assets/youtube-screen.jpg" alt="sample image">
+      <img src="./img/youtube-screen.jpg" alt="sample image">
       <div id="useage">
         Useage
         <ol>
@@ -24,7 +24,6 @@
         [Attention]
         <p> When the video is forbidden to play on embedded player, WallTube will skip the video.</p>
         <p>support: <a href="https://twitter.com/im_nuko">Twitter: Im_nuko</a> or  <a href="https://github.com/im-neko">Github: Im-neko</a></p>
-        <p>repository: <a href="https://github.com/im-neko/wall-tube">GitHub</a></p>
       </div>
       
     </div>
@@ -60,21 +59,19 @@
             }
           });
         };
+
         const onPlayerReady = () => {
           player.loadPlaylist({
             'listType': 'playlist',
             'list': listId,
           });
+          
         }
 
         const onStateChange = (event) => {
           switch (event.data) {
-            case 0: 
-              player.loadPlaylist({
-                'listType': 'playlist',
-                'list': listId,
-              });
-              return
+            case 0:
+              player.nextVideo();
             case 1:
               ipcRenderer.send('loadStatus', true);
               return
@@ -85,7 +82,6 @@
 
         const onError = (event) => {
           console.error(event)
-          player.nextVideo();
           switch (event.data) {
             case 2: 
               player.loadPlaylist({
