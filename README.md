@@ -7,4 +7,4 @@ Play your Youtube Playlist as a WallPaper
 
 ## Download
 Please download from release page  
-https://github.com/Im-neko/wall-tube/releases/tag/v1.0.0
+https://github.com/Im-neko/wall-tube/releases
